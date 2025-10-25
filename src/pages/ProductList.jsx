@@ -42,15 +42,19 @@ const ProductList = () => {
                     </tr>
                 </thead>
                 <tbody className='p-4 border border-solid border-black'>
-                    <tr className='p-4 border border-solid border-black'>
-                        <td className='p-4 border border-solid border-black'>1</td>
-                        <td className='p-4 border border-solid border-black'>Name is here</td>
-                        <td className='p-4 border border-solid border-black'>Price is here</td>
-                        <td className='p-4 border border-solid border-black'>
-                            <button className='py-4 px-6 inline-block text-white cursor-pointer rounded-lg mr-4 bg-yellow-500'>Update</button>
-                            <button className='py-4 px-6 inline-block text-white cursor-pointer rounded-lg bg-red-500'>Delete</button>
-                        </td>
-                    </tr>
+                    {products.map((product) => {
+                        return (
+                            <tr key={product.id} className='p-4 border border-solid border-black'>
+                                <td className='p-4 border border-solid border-black'>{product.id}</td>
+                                <td className='p-4 border border-solid border-black'>{product.name}</td>
+                                <td className='p-4 border border-solid border-black'>{product.price}</td>
+                                <td className='p-4 border border-solid border-black'>
+                                    <button className='py-4 px-6 inline-block text-white cursor-pointer rounded-lg mr-4 bg-yellow-500'>Update</button>
+                                    <button className='py-4 px-6 inline-block text-white cursor-pointer rounded-lg bg-red-500'>Delete</button>
+                                </td>
+                            </tr>
+                        )
+                    })}
                 </tbody>
             </table>
         </div>
