@@ -1,34 +1,14 @@
-import React from 'react'
-
-const products = [
-    {
-        id: 1,
-        name: 'Product - 1',
-        price: 200,
-    },
-    {
-        id: 2,
-        name: 'Product - 2',
-        price: 200,
-    },
-    {
-        id: 3,
-        name: 'Product - 3',
-        price: 200,
-    },
-    {
-        id: 4,
-        name: 'Product - 4',
-        price: 200,
-    },
-    {
-        id: 5,
-        name: 'Product - 5',
-        price: 200,
-    },
-]
+import React, { useEffect, useState } from 'react'
 
 const ProductList = () => {
+    const [products, setProducts] = useState([])
+
+    const storeData = JSON.parse(localStorage.getItem("products")) || []
+
+    useEffect(() => {
+        setProducts(storeData)
+    }, [])
+
     return (
         <div>
             <h1 className='text-4xl text-center'>Product List</h1>
@@ -42,10 +22,10 @@ const ProductList = () => {
                     </tr>
                 </thead>
                 <tbody className='p-4 border border-solid border-black'>
-                    {products.map((product) => {
+                    {products.map((product,index) => {
                         return (
                             <tr key={product.id} className='p-4 border border-solid border-black'>
-                                <td className='p-4 border border-solid border-black'>{product.id}</td>
+                                <td className='p-4 border border-solid border-black'>{index + 1}</td>
                                 <td className='p-4 border border-solid border-black'>{product.name}</td>
                                 <td className='p-4 border border-solid border-black'>{product.price}</td>
                                 <td className='p-4 border border-solid border-black'>

@@ -1,9 +1,11 @@
 import React, { useState } from "react";
+import { useNavigate } from "react-router-dom";
 import { toast } from "react-toastify";
 
 const ProductCreate = () => {
     const [name, setName] = useState("");
     const [price, setPrice] = useState("");
+    const navigate = useNavigate()
 
     const handleSubmit = (e) => {
         e.preventDefault();
@@ -20,6 +22,8 @@ const ProductCreate = () => {
         }
         storeData.push(newProduct)
         localStorage.setItem("products", JSON.stringify(storeData))
+        toast.success("Product create successfully")
+        navigate('/')
     };
     return (
         <div>
