@@ -1,4 +1,4 @@
-import React, { useState } from 'react'
+import React, { useEffect, useState } from 'react'
 import { useNavigate, useParams } from 'react-router-dom'
 import { toast } from 'react-toastify';
 
@@ -8,12 +8,24 @@ const ProductUpdate = () => {
     const [price, setPrice] = useState("");
     const navigate = useNavigate()
 
+    const storeData = JSON.parse(localStorage.getItem('products'))
+
+    const oldData = storeData.find((product) => product.id == id);
+
+    useEffect(() => {
+        setName(oldData.name)
+        setPrice(oldData.price)
+    }, [])
+
     const handleSubmit = (e) => {
         e.preventDefault();
-
         if (!name || !price) {
             toast.error("All fields are required");
         }
+        const updateData = storeData.map((product) => product.id == id ? { ...product, name, price } : product)
+        localStorage.setItem("products", JSON.stringify(updateData))
+        toast.success("Product update successfully")
+        navigate('/')
     };
     return (
         <div>
