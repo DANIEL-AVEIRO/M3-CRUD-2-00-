@@ -4,6 +4,7 @@ import ProductList from './pages/ProductList'
 import ProductCreate from './pages/ProductCreate'
 import { ToastContainer } from 'react-toastify'
 import Header from './components/Header'
+import ProductUpdate from './pages/ProductUpdate'
 
 const App = () => {
   return (
@@ -13,6 +14,7 @@ const App = () => {
         <Routes>
           <Route path='/' element={<ProductList />} />
           <Route path='/product/create/' element={<ProductCreate />} />
+          <Route path='/product/update/:id' element={<ProductUpdate />} />
         </Routes>
       </div>
       <ToastContainer />
