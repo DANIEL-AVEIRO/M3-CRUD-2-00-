@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from 'react'
 import { Link } from 'react-router-dom'
+import { toast } from 'react-toastify'
 
 const ProductList = () => {
     const [products, setProducts] = useState([])
@@ -9,6 +10,13 @@ const ProductList = () => {
     useEffect(() => {
         setProducts(storeData)
     }, [])
+
+    const handleDelete = (id) => {
+        const afterDelete = products.filter((product) => product.id != id)
+        setProducts(afterDelete)
+        localStorage.setItem("products", JSON.stringify(afterDelete))
+        toast.success("Product Delete successfully")
+    }
 
     return (
         <div>
@@ -31,7 +39,7 @@ const ProductList = () => {
                                 <td className='p-4 border border-solid border-black text-center'>{product.price}</td>
                                 <td className='p-4 border border-solid border-black text-center'>
                                     <Link to={`/product/update/${product.id}`} className='py-4 px-6 inline-block text-white cursor-pointer rounded-lg mr-4 bg-yellow-500'>Update</Link>
-                                    <button className='py-4 px-6 inline-block text-white cursor-pointer rounded-lg bg-red-500'>Delete</button>
+                                    <button onClick={() => handleDelete(product.id)} className='py-4 px-6 inline-block text-white cursor-pointer rounded-lg bg-red-500'>Delete</button>
                                 </td>
                             </tr>
                         )
